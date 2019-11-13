@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createFriend } from '../../actions/index'
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import InfoIcon from '@material-ui/icons/Info';
-import ImageIcon from '@material-ui/icons/Image';
-import AddIcon from '@material-ui/icons/Add';
-import CancelIcon from '@material-ui/icons/Cancel';
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import MailOutlineIcon from '@material-ui/icons/MailOutline'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import InfoIcon from '@material-ui/icons/Info'
+import ImageIcon from '@material-ui/icons/Image'
+import AddIcon from '@material-ui/icons/Add'
+import CancelIcon from '@material-ui/icons/Cancel'
 
 export default props => {
     const dispatch = useDispatch()
