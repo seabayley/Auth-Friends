@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { createFriend } from '../../actions/index'
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,6 +12,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import InfoIcon from '@material-ui/icons/Info';
+import ImageIcon from '@material-ui/icons/Image';
+import AddIcon from '@material-ui/icons/Add';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 export default props => {
     const dispatch = useDispatch()
@@ -26,14 +28,6 @@ export default props => {
     const handleChange = (type, event) => {
         setFriend({ ...friend, [type]: event.target.value })
     }
-
-    const useStyles = makeStyles(theme => ({
-        margin: {
-            margin: theme.spacing(2),
-        },
-    }));
-
-    const classes = useStyles();
 
     return (
         <Dialog open={props.open} onClose={props.onClose}>
@@ -88,12 +82,27 @@ export default props => {
                         ),
                     }}
                 />
+                <TextField
+                    margin="dense"
+                    id="image"
+                    label="Image Url"
+                    type="url"
+                    onChange={(event) => handleChange('image', event)}
+                    fullWidth
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <ImageIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleConfirm} color="primary">
+                <Button onClick={handleConfirm} color="primary" startIcon={<AddIcon />}>
                     Add
           </Button>
-                <Button onClick={props.onClose} color="primary">
+                <Button onClick={props.onClose} color="secondary" startIcon={<CancelIcon />}>
                     Cancel
           </Button>
             </DialogActions>

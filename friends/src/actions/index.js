@@ -71,7 +71,8 @@ export const updateFriend = payload => dispatch => {
         .put(`http://localhost:5000/api/friends/${payload.id}`, {
             email: String(payload.email),
             name: String(payload.name),
-            age: Number(payload.age)
+            age: Number(payload.age),
+            image: String(payload.image)
         })
         .then(res => dispatch({ type: UPDATE_FRIEND_SUCCESS, payload: res.data }))
         .catch(err => dispatch({ type: UPDATE_FRIEND_FAIL, payload: err }))

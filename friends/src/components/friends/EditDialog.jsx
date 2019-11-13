@@ -13,6 +13,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import InfoIcon from '@material-ui/icons/Info';
+import ImageIcon from '@material-ui/icons/Image';
+import CancelIcon from '@material-ui/icons/Cancel';
+import CheckIcon from '@material-ui/icons/Check';
 
 export default props => {
     const dispatch = useDispatch()
@@ -92,12 +95,28 @@ export default props => {
                         ),
                     }}
                 />
+                <TextField
+                    margin="dense"
+                    id="image"
+                    defaultValue={currentFriend.image}
+                    label="Image Url"
+                    type="url"
+                    onChange={(event) => handleChange('age', event)}
+                    fullWidth
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <ImageIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleConfirm} color="primary">
+                <Button onClick={handleConfirm} color="primary" startIcon={<CheckIcon />}>
                     Save Changes
           </Button>
-                <Button onClick={props.onClose} color="primary">
+                <Button onClick={props.onClose} color="secondary" startIcon={<CancelIcon />}>
                     Cancel
           </Button>
             </DialogActions>

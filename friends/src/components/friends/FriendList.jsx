@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getFriends, updateCurrentFriend, deleteFriend, logoutUser } from '../../actions/index'
-import { Redirect } from 'react-router-dom'
 
 import AddDialog from './AddDialog'
 import EditDialog from './EditDialog'
@@ -28,7 +27,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 
@@ -40,7 +38,8 @@ export default (props) => {
     const [dialogOpen, setDialogOpen] = useState({
         'edit': false,
         'delete': false,
-        'add': false
+        'add': false,
+        'addToast': false
     })
 
     const toggleDialog = name => {
@@ -100,7 +99,7 @@ export default (props) => {
             flexDirection: 'column',
         },
         friendMedia: {
-            paddingTop: '56.25%', // 16:9
+            paddingTop: '100%' //56.25 for 16:9
         },
         friendContent: {
             flexGrow: 1,
@@ -129,15 +128,14 @@ export default (props) => {
                 </Toolbar>
             </AppBar>
             <main>
-                {/* Hero unit */}
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                             Manage Those Friends
-                </Typography>
+                        </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
                             Here you can add new people to your already impressive list of friends.
-                </Typography>
+                        </Typography>
                         <div className={classes.heroButtons}>
                             <Grid container spacing={2} justify="center">
                                 <Grid item>
@@ -148,23 +146,18 @@ export default (props) => {
                                 <Grid item>
                                     <Button variant="outlined" color="secondary" startIcon={<ExitToAppIcon />} onClick={handleLogout}>
                                         logout
-                      </Button>
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </div>
                     </Container>
                 </div>
                 <Container className={classes.friendGrid} maxWidth="md">
-                    {/* End hero unit */}
                     <Grid container spacing={4}>
                         {friends.map(friend => (
                             <Grid item key={friend.id} xs={12} sm={6} md={4}>
                                 <Card className={classes.friend}>
-                                    <CardMedia
-                                        className={classes.friendMedia}
-                                        image="https://source.unsplash.com/random"
-                                        title="Unknown"
-                                    />
+                                    <CardMedia className={classes.friendMedia} image={friend.image} title="Unknown" />
                                     <CardContent className={classes.friendContent}>
                                         <Typography gutterBottom variant="h5" component="h2">
                                             {friend.name} - Age: {friend.age}
@@ -179,7 +172,7 @@ export default (props) => {
                                         </Button>
                                         <Button size="small" color="secondary" startIcon={<DeleteIcon />} onClick={() => handleConfirm(friend)}>
                                             Delete
-                        </Button>
+                                        </Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -187,7 +180,6 @@ export default (props) => {
                     </Grid>
                 </Container>
             </main>
-            {/* Footer */}
             <footer className={classes.footer}>
                 <Typography variant="h6" align="center" gutterBottom>
                     Friend List
@@ -197,9 +189,6 @@ export default (props) => {
             </Typography>
                 <Copyright />
             </footer>
-            {/* End footer */}
-
-            {/* Dialogs */}
             <AddDialog open={dialogOpen['add']} onClose={() => toggleDialog('add')} />
             <EditDialog open={dialogOpen['edit']} onClose={() => toggleDialog('edit')} />
             <Dialog open={dialogOpen['delete']} onClose={() => toggleDialog('delete')}>
@@ -207,15 +196,15 @@ export default (props) => {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         If you delete this person, they will be forever removed from your friend list.
-          </DialogContentText>
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => toggleDialog('delete')} color="primary">
-                        Not now
-          </Button>
-                    <Button onClick={handleDelete} color="secondary" autoFocus>
+                        Nevermind
+                    </Button>
+                    <Button onClick={handleDelete} color="secondary" startIcon={<DeleteForeverIcon />} autoFocus>
                         Delete
-          </Button>
+                    </Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>
