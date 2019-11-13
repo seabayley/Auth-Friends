@@ -5,7 +5,18 @@ import {
     GET_FRIENDS_START,
     GET_FRIENDS_SUCCESS,
     GET_FRIENDS_FAIL,
-    UPDATE_TOKEN
+    CREATE_FRIEND_START,
+    CREATE_FRIEND_SUCCESS,
+    CREATE_FRIEND_FAIL,
+    UPDATE_FRIEND_START,
+    UPDATE_FRIEND_SUCCESS,
+    UPDATE_FRIEND_FAIL,
+    DELETE_FRIEND_START,
+    DELETE_FRIEND_SUCCESS,
+    DELETE_FRIEND_FAIL,
+    UPDATE_TOKEN,
+    UPDATE_CURRENT_FRIEND,
+    LOGOUT_USER
 } from '../actions'
 
 const initialState = {
@@ -16,7 +27,8 @@ const initialState = {
     friends: [],
     gettingFriends: false,
     gotFriends: false,
-    friendError: ''
+    friendError: '',
+    currentFriend: ''
 }
 
 export default (state = initialState, action) => {
@@ -69,12 +81,97 @@ export default (state = initialState, action) => {
             }
         }
 
+        case CREATE_FRIEND_START: {
+            return {
+                ...state,
+                creatingFriend: true
+            }
+        }
+
+        case CREATE_FRIEND_SUCCESS: {
+            return {
+                ...state,
+                creatingFriend: false,
+                friends: action.payload
+            }
+        }
+
+        case CREATE_FRIEND_FAIL: {
+            return {
+                ...state,
+                creatingFriend: false,
+                friendError: action.payload
+            }
+        }
+
+        case UPDATE_FRIEND_START: {
+            return {
+                ...state,
+                creatingFriend: true
+            }
+        }
+
+        case UPDATE_FRIEND_SUCCESS: {
+            return {
+                ...state,
+                creatingFriend: false,
+                friends: action.payload
+            }
+        }
+
+        case UPDATE_FRIEND_FAIL: {
+            return {
+                ...state,
+                creatingFriend: false,
+                friendError: action.payload
+            }
+        }
+
+        case DELETE_FRIEND_START: {
+            return {
+                ...state,
+                deletingFriend: true
+            }
+        }
+
+        case DELETE_FRIEND_SUCCESS: {
+            return {
+                ...state,
+                deletingFriend: false,
+                friends: action.payload
+            }
+        }
+
+        case DELETE_FRIEND_FAIL: {
+            return {
+                ...state,
+                deletingFriend: false,
+                friendError: action.payload
+            }
+        }
+
         case UPDATE_TOKEN: {
             return {
                 ...state,
                 token: action.payload
             }
         }
+
+        case UPDATE_CURRENT_FRIEND: {
+            return {
+                ...state,
+                currentFriend: action.payload
+            }
+        }
+
+        case LOGOUT_USER: {
+            return {
+                ...state,
+                loggedIn: false
+            }
+        }
+
+
         default: {
             return state
         }
